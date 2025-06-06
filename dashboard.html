@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Domain Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Domain Management Dashboard</h1>
+            <div class="user-info">
+                Welcome, <span id="user-fullname"></span> (<span id="user-role"></span>)
+                <button id="profile-btn">Profile</button>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="controls">
+                <input type="text" id="search-bar" placeholder="Search by domain name...">
+                <button id="add-domain-btn" class="admin-only" style="display:none;">+ Add Domain</button>
+            </div>
+            <div class="table-container">
+                <table id="domain-table">
+                    <thead>
+                        <tr>
+                            <th>Domain Name</th>
+                            <th>Owner</th>
+                            <th>Registration Date</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                            <th class="admin-only" style="display:none;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="domain-table-body">
+                        <!-- Data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                 <div id="loading-spinner" style="display: none; text-align: center; padding: 20px;">Loading...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Domain Modal -->
+    <div id="domain-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2 id="modal-title">Add New Domain</h2>
+            <form id="domain-form">
+                <input type="hidden" id="domain-id">
+                <input type="hidden" id="domain-row-index">
+                <div class="form-group">
+                    <label for="domain-name">Domain Name</label>
+                    <input type="text" id="domain-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="owner-username">Owner Username</label>
+                    <input type="text" id="owner-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-date">Registration Date</label>
+                    <input type="date" id="reg-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="exp-date">Expiry Date</label>
+                    <input type="date" id="exp-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" required>
+                        <option value="Active">Active</option>
+                        <option value="Expired">Expired</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+                 <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes"></textarea>
+                </div>
+                <button type="submit" id="save-domain-btn">Save Domain</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>My Profile</h2>
+            <form id="profile-form">
+                 <input type="hidden" id="profile-row-index">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="profile-username" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="profile-fullname">Full Name</label>
+                    <input type="text" id="profile-fullname" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile-new-password">New Password (leave blank if no change)</label>
+                    <input type="password" id="profile-new-password">
+                </div>
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
